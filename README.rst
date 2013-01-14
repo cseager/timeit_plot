@@ -44,7 +44,7 @@ the specified conditions. ::
     >>> plt.show()
 
 Here is the plot: 
-.. image: https://github.com/cseager/timeit_plot/blob/master/images/joined%20lists.png
+.. image:: https://github.com/cseager/timeit_plot/blob/master/images/joined%20lists.png
     :alt: plot of 3 expression performances
 
 
@@ -76,7 +76,7 @@ plot by using the keyword arg ``series=1``. ::
     >>> plt.show()
 
 
-.. image:: https://github.com/cseager/timeit_plot/blob/master/images/ngram%20length%20on%2020%20items%20v%20time.png
+.. image::: https://github.com/cseager/timeit_plot/blob/master/images/ngram%20length%20on%2020%20items%20v%20time.png
     :alt: example scatter plot
 
 There are also plotting functions to examine how two parameters 
@@ -99,7 +99,7 @@ Data with two variables can be plotted either in a 3D mesh plot: ::
     >>> timeit_plot3D(data3, 'list size', 'ngram length')
 
 
-.. image:: https://github.com/cseager/timeit_plot/blob/master/images/3D%20indexing.png
+.. image::: https://github.com/cseager/timeit_plot/blob/master/images/3D%20indexing.png
     :alt: example 3D plot
 
 Or it can be shown with a heatmap plot: ::
@@ -107,7 +107,7 @@ Or it can be shown with a heatmap plot: ::
     >>> timeit_heatmap(data3, 'list size', 'ngram length')
 
 
-.. image:: https://github.com/cseager/timeit_plot/blob/master/images/heatmap%20indexing.png
+.. image::: https://github.com/cseager/timeit_plot/blob/master/images/heatmap%20indexing.png
     :alt: example heatmap plot
         
 Or a bubble plot: ::
@@ -116,7 +116,7 @@ Or a bubble plot: ::
                 style='bubble', bubble_size=5000, ylabel='ngram length')
 
 
-.. image:: https://github.com/cseager/timeit_plot/blob/master/images/bubble%20plot.png
+.. image::: https://github.com/cseager/timeit_plot/blob/master/images/bubble%20plot.png
     :alt: example bubble plot
 
 The ``bubble_size`` parameter is a multipler. The value needed 
