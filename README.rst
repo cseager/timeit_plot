@@ -43,8 +43,11 @@ the specified conditions. ::
     >>> timeit_plot2D(data, 'list length', 'list comprehension vs map')
     >>> plt.show()
 
+Here is the plot: 
 .. image: https://github.com/cseager/timeit_plot/blob/master/images/joined%20lists.png
     :alt: plot of 3 expression performances
+
+
 
 2. Further examples
 -------------------
