@@ -42,9 +42,9 @@ the specified conditions. ::
     testing "-".join(map(str, range({0})))...
     >>> timeit_plot2D(data, 'list length', 'list comprehension vs map')
     >>> plt.show()
-    
-    .. image: images/joined lists.png
-        :alt: plot of 3 expression performances
+
+.. image: https://github.com/cseager/timeit_plot/blob/master/images/joined%20lists.png
+    :alt: plot of 3 expression performances
 
 2. Further examples
 -------------------
@@ -73,8 +73,8 @@ plot by using the keyword arg ``series=1``. ::
     >>> plt.show()
 
 
-    .. image:: images/ngram length on 20 items v time.png
-        :alt: example scatter plot
+.. image:: https://github.com/cseager/timeit_plot/blob/master/images/ngram%20length%20on%2020%20items%20v%20time.png
+    :alt: example scatter plot
 
 There are also plotting functions to examine how two parameters 
 can affect the performance of a single function. The following large 
@@ -96,16 +96,16 @@ Data with two variables can be plotted either in a 3D mesh plot: ::
     >>> timeit_plot3D(data3, 'list size', 'ngram length')
 
 
-    .. image:: images/3D indexing.png
-        :alt: example 3D plot
+.. image:: https://github.com/cseager/timeit_plot/blob/master/images/3D%20indexing.png
+    :alt: example 3D plot
 
 Or it can be shown with a heatmap plot: ::
 
     >>> timeit_heatmap(data3, 'list size', 'ngram length')
 
 
-    .. image:: images/heatmap indexing.png
-        :alt: example heatmap plot
+.. image:: https://github.com/cseager/timeit_plot/blob/master/images/heatmap%20indexing.png
+    :alt: example heatmap plot
         
 Or a bubble plot: ::
 
@@ -113,8 +113,8 @@ Or a bubble plot: ::
                 style='bubble', bubble_size=5000, ylabel='ngram length')
 
 
-    .. image:: images/bubble plot.png
-        :alt: example bubble plot
+.. image:: https://github.com/cseager/timeit_plot/blob/master/images/bubble%20plot.png
+    :alt: example bubble plot
 
 The ``bubble_size`` parameter is a multipler. The value needed 
 to get the desired bubble size will depend on the number of 
