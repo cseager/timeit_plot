@@ -73,7 +73,7 @@ plot by using the keyword arg ``series=1``. ::
     >>> timeit_plot2D(data, 'ngram length', 'list length 20', series=1, style='scatter')
     >>> plt.show()
 
-.. image:: http://raw.github.com/cseager/timeit_plot/master/images/ngram%20length%20on%2020%20items%20v%20time.png
+.. image:: https://raw.github.com/cseager/timeit_plot/master/images/ngram%20length%20on%2020%20items%20v%20time.png
     :alt: example scatter plot
 
 There are also plotting functions to examine how two parameters 
