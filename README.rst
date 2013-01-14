@@ -43,7 +43,7 @@ the specified conditions. ::
     >>> timeit_plot2D(data, 'list length', 'list comprehension vs map')
     >>> plt.show()
 
-.. image:: http://github.com/cseager/timeit_plot/blob/master/images/joined%20lists.png
+.. image:: https://raw.github.com/cseager/timeit_plot/blob/master/images/joined%20lists.png
     :alt: plot of 3 expression performances
 
 
@@ -95,14 +95,14 @@ Data with two variables can be plotted either in a 3D mesh plot: ::
 
     >>> timeit_plot3D(data3, 'list size', 'ngram length')
 
-.. image:: http://github.com/cseager/timeit_plot/blob/master/images/3D%20indexing.png
+.. image:: https://raw.github.com/cseager/timeit_plot/blob/master/images/3D%20indexing.png
     :alt: example 3D plot
 
 Or it can be shown with a heatmap plot: ::
 
     >>> timeit_heatmap(data3, 'list size', 'ngram length')
 
-.. image:: http://github.com/cseager/timeit_plot/blob/master/images/heatmap%20indexing.png
+.. image:: https://raw.github.com/cseager/timeit_plot/blob/master/images/heatmap%20indexing.png
     :alt: example heatmap plot
         
 Or a bubble plot: ::
@@ -110,7 +110,7 @@ Or a bubble plot: ::
     >>> timeit_plot2D(data3, 'list size', 'bubble size = time', series=[0,1],
                 style='bubble', bubble_size=5000, ylabel='ngram length')
 
-.. image:: http://github.com/cseager/timeit_plot/blob/master/images/bubble%20plot.png
+.. image:: https://raw.github.com/cseager/timeit_plot/blob/master/images/bubble%20plot.png
     :alt: example bubble plot
 
 The ``bubble_size`` parameter is a multipler. The value needed 
