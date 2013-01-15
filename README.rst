@@ -67,7 +67,7 @@ For example, the first entry from ``data`` would be:
 ``{'use_iterators(range({0}),{1})': [[20, 3, 0.6359], ...]``
 
 In this example, the first variable is held constant, because 
-range(*[20,21]) = [20]. The second variable is chosen for the following
+``range(*[20,21]) = [20]``. The second variable is chosen for the following
 plot by using the keyword arg ``series=1``. ::
 
     >>> timeit_plot2D(data, 'ngram length', 'list length 20', series=1, style='scatter')

@@ -13,12 +13,16 @@ from matplotlib.ticker import LinearLocator, FormatStrFormatter
 def timeit_compare(funcs, inputs, setups='pass', **kwargs):
     """Compares speed of functions across input conditions.
     
-    Uses string substitution in 'funcs' while iterating over ranges of 
-    values in 'inputs' to compare speed. 
-    Values from 'inputs' will be put through range(i) to get a range
-    to test the corresponding variable in the string substitution. 
+    'funcs' should be a list of functions expressed as strings. 
+    String substitution is done on each function while iterating 
+    over ranges of values in 'inputs' to compare speed. 
+    
+    'inputs' should be a list of ranges that map to variables in each 
+    function string: [var1_range, var2_range,...]. These values may be 
+    single numbers or lists that could be used in range(*i). This 
+    range tests the corresponding variable in the string substitution. 
     Singlet values in 'inputs' will be interpreted as range(i), 
-    testing from 0-i. List or tuple values will be interpreted by range(). 
+    testing from 0 to i.  
 
     'setup' can be 'pass' for no setup, 'main' to import each function 
     from the local environment, or a list of setup strings that maps 
