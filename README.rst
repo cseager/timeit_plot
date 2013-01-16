@@ -50,6 +50,7 @@ the specified conditions. ::
 2. Further examples
 -------------------
 
+``timeit_compare()`` can take any number of functions and variables. 
 The example functions included, ``use_iterators()`` and ``use_indexing()``, 
 compare methods of grouping lists. ::
 
@@ -70,7 +71,7 @@ In this example, the first variable is held constant, because
 ``range(*[20,21]) = [20]``. The second variable is chosen for the following
 plot by using the keyword arg ``series=1``. ::
 
-    >>> timeit_plot2D(data, 'ngram length', 'list length 20', series=1, style='scatter')
+    >>> timeit_plot2D(data, 'ngram length', 'list length 20', series=1, style='scatter', size=100)
     >>> plt.show()
 
 .. image:: https://raw.github.com/cseager/timeit_plot/master/images/ngram%20length%20on%2020%20items%20v%20time.png
@@ -108,7 +109,7 @@ Or it can be shown with a heatmap plot: ::
 Or a bubble plot: ::
 
     >>> timeit_plot2D(data3, 'list size', 'bubble size = time', series=[0,1],
-                style='bubble', bubble_size=5000, ylabel='ngram length')
+                style='bubble', size=5000, ylabel='ngram length')
 
 .. image:: https://raw.github.com/cseager/timeit_plot/master/images/bubble%20plot.png
     :alt: example bubble plot

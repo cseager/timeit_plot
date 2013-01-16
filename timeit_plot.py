@@ -57,6 +57,7 @@ def timeit_compare(funcs, inputs, setups='pass', **kwargs):
             performance[f].append(list(value) + [result])
     return performance
 
+
 def get_conditions(inputs = []): 
     """Converts a set of ranges for all variables into an 
     exhaustive list of test conditions for timeit_compare(). 
@@ -79,7 +80,11 @@ def get_conditions(inputs = []):
     return conditions
 
 
-# TODO: think about putting 2 and 3 grams in different colors
+# TODO: function to filter a large dataset
+# TODO: filter and options to plot 2 and 3 grams in different colors 
+#       on the same chart
+
+
 def timeit_plot2D(data, xlabel='xlabel', title='title', **kwargs):
     """Plots the results from a defaultdict returned by timeit_compare.
     
@@ -93,28 +98,27 @@ def timeit_plot2D(data, xlabel='xlabel', title='title', **kwargs):
     """
     series = kwargs.get('series', 0)
     style = kwargs.get('style', 'line')
-    bubble_size = kwargs.get('bubble_size', 500)
+    size = kwargs.get('size', 500)
     ylabel = kwargs.get('ylabel', 'time')
+    cmap = kwargs.get('cmap', 'rainbow')
+    lloc = kwargs.get('lloc', 2)
     dataT = {}
     # set color scheme
-    c = iter(cm.rainbow(np.linspace(0, 1, len(data))))
+    c = iter(plt.get_cmap(cmap)(np.linspace(0, 1, len(data))))
     # transpose the data from [x, y, z]... into ([x...], [y...], [z...])
     for k, v in data.items():
         dataT[k] = zip(*v)
     fig, ax = plt.subplots()
     for k, v in dataT.items():
         if style == 'scatter':
-            ax.scatter(v[series], v[-1], s=100, c=next(c), alpha=.75)
+            ax.scatter(v[series], v[-1], s=size, c=next(c), alpha=.75)
         elif style == 'bubble':
             x, y, z = v[series[0]], v[series[1]], v[-1]
-            ax.scatter(x, y, s=[bubble_size*i for i in z], c=next(c), alpha=.5)
+            ax.scatter(x, y, s=[size*i for i in z], c=next(c), alpha=.5)
         else: 
             ax.plot(v[series], v[-1], c=next(c), lw=2)
-    try:
-        # TODO: fix format() for data across multiple variables/substitutions
-        ax.legend([k.format("x") for k in dataT.keys()], loc=2)
-    except:
-        ax.legend(dataT.keys(), loc=2)
+    # TODO: BUG: no way to set other parameters manually (README fig2)
+    ax.legend([substitute_titles(k,series) for k in dataT.keys()], loc=lloc)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_title(title)
@@ -140,18 +144,18 @@ def timeit_plot3D(data, xlabel='xlabel', ylabel='ylabel', **kwargs):
         wide, tall = 1+wide/intervalX, 1+tall/intervalY
         X = np.reshape(X, [wide, tall])
         Y = np.reshape(Y, [wide, tall])
+        # TODO: BUG: fix so that Z transposes with x & y reversed
         Z = np.reshape(Z, [wide, tall])
         surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cmap, linewidth=0, antialiased=False)
         ax.zaxis.set_major_locator(LinearLocator(10))
         ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        # TODO: add format() to substitute 'x' and 'y' to make titles neater
-        ax.set_title(k)
+        ax.set_title(substitute_titles(k,series))
         fig.colorbar(surf, shrink=0.5, aspect=5)
         figs.append(fig)
     return figs
-    
+
     
 def timeit_heatmap(data, xlabel='xlabel', ylabel='ylabel', **kwargs):
     """Heatmap plot of timeit data, one chart per function. 
@@ -169,15 +173,16 @@ def timeit_heatmap(data, xlabel='xlabel', ylabel='ylabel', **kwargs):
         wide, tall = (max(X)-min(X)+1), (max(Y)-min(Y)+1)
         intervalX = max(X) - min(heapq.nlargest(2,set(X)))
         intervalY = max(Y) - min(heapq.nlargest(2,set(Y)))
-        try: 
+        if intervalX > 1: 
             wide = 1 + wide/intervalX
-        except:
+        else:
             wide = 1
-        try: 
+        if intervalY > 1: 
             tall = 1 + tall/intervalY
-        except: 
+        else: 
             tall = 1
-        Z = np.reshape(Z, [wide, -1])
+        # TODO: BUG: fix so that Z transposes with x & y series reversed
+        Z = np.reshape(Z, [wide, tall])
         Z = list(zip(*Z))           # Z is transposed
         Z = [i for i in Z[::-1]]    # Z is upside down
         fig, ax = plt.subplots()
@@ -185,7 +190,16 @@ def timeit_heatmap(data, xlabel='xlabel', ylabel='ylabel', **kwargs):
         fig.colorbar(hmap).set_label("time")
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        # TODO: add format() to substitute 'x' and 'y' to make titles neater
-        ax.set_title(k)
+        ax.set_title(substitute_titles(k,series))
         figs.append(fig)
     return figs
+
+def substitute_titles(label, series):
+    ordered_axes=["x", "y", "z"]
+    try: 
+        for i, v in enumerate(series): 
+            label = label.replace("{"+str(v)+"}", ordered_axes[i])
+    except: 
+        label = label.replace("{"+str(series)+"}", ordered_axes[0])
+    return label
+
