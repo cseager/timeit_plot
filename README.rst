@@ -19,9 +19,9 @@ timeit tests at one time, and timeit can take a while to finish
 if the default number of cycles is used. 
 
 The timeit module's Python interface takes functions expressed as strings, 
-tests them a certain number of times, and reports back the execution time. ::
+tests them a certain number of times, and reports back the execution time. 
+From `Python documentation: <http://docs.python.org/2/library/timeit.html>`_::
 
-    >>> # From http://docs.python.org/2/library/timeit.html
     >>> timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
     0.8187260627746582
     >>> timeit.timeit('"-".join([str(n) for n in range(100)])', number=10000)
@@ -34,8 +34,8 @@ ranges of values to record how fast the function(s) perform with
 the specified conditions. ::
 
     >>> functions = ['"-".join(str(n) for n in range({0}))', 
-            '"-".join([str(n) for n in range({0})])', 
-            '"-".join(map(str, range({0})))']
+                     '"-".join([str(n) for n in range({0})])', 
+                     '"-".join(map(str, range({0})))']
     >>> data = timeit_compare(functions, [[10,101,10]], number=10000)
     testing "-".join(str(n) for n in range({0}))...
     testing "-".join([str(n) for n in range({0})])...
@@ -50,7 +50,8 @@ the specified conditions. ::
 2. Further examples
 -------------------
 
-``timeit_compare()`` can take any number of functions and variables. 
+``timeit_compare()`` can take any number of functions and variables. This can 
+be helpful in determining or comparing algorithms' Big O or time complexity. 
 The example functions included, ``use_iterators()`` and ``use_indexing()``, 
 compare methods of grouping lists. ::
 

@@ -21,7 +21,7 @@ def timeit_compare(funcs, inputs, setups='pass', **kwargs):
     function string: [var1_range, var2_range,...]. These values may be 
     single numbers or lists that could be used in range(*i). This 
     range tests the corresponding variable in the string substitution. 
-    Singlet values in 'inputs' will be interpreted as range(i), 
+    Single values in 'inputs' will be interpreted as range(i), 
     testing from 0 to i.  
 
     'setup' can be 'pass' for no setup, 'main' to import each function 
@@ -62,7 +62,7 @@ def get_conditions(inputs = []):
     """Converts a set of ranges for all variables into an 
     exhaustive list of test conditions for timeit_compare(). 
     """
-    # Wrap all singlets in a list for range(*i) below
+    # Wrap all singles in a list for range(*i) below
     var = [[n] if not isinstance(n,(list,tuple)) else n for n in inputs]
     
     # Input like [20] will be interpreted as a range of 0-20. 
