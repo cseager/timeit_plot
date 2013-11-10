@@ -26,3 +26,23 @@ def use_indexing(iterable, n=2):
     for i in enumerate(iterable[:-(n-1)]):
         ngrams.append( tuple([iterable[i[0] + j] for j in range(n)]) )
     return ngrams
+
+
+# fibonacci with and without memoization 
+
+def memoize_fib(n): 
+    s = {}
+    return memo_fib_recursive(n, s)
+
+def memo_fib_recursive(n, saved): 
+    if n == 1 or n == 0: 
+        return 1
+    if n not in saved: 
+        saved[n] = memo_fib_recursive(n-1, saved) + memo_fib_recursive(n-2, saved)
+    return saved[n]
+
+def recursive_fib(n): 
+    if n == 1 or n == 0: 
+        return 1
+    else: 
+        return recursive_fib(n-1) + recursive_fib(n-2)

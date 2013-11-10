@@ -17,23 +17,34 @@ def timeit_compare(funcs, inputs, setups='pass', **kwargs):
     String substitution is done on each function while iterating 
     over ranges of values in 'inputs' to compare speed. 
     
-    'inputs' should be a list of ranges that map to variables in each 
-    function string: [var1_range, var2_range,...]. These values may be 
-    single numbers or lists that could be used in range(*i). This 
-    range tests the corresponding variable in the string substitution. 
-    Single values in 'inputs' will be interpreted as range(i), 
-    testing from 0 to i.  
+    'inputs' should be an iterable range of values over which 'funcs' 
+    should be tested. 
 
-    'setup' can be 'pass' for no setup, 'main' to import each function 
+    'setups' can be 'pass' for no setup, 'main' to import each function 
     from the local environment, or a list of setup strings that maps 
     to the list 'funcs'. 
+
+    Other inputs: 
+        'number' - the number of times to run the function (a timeit option)
+        'print_conditions' - if True, print the combinations of input conditions
     
+    >>> functions = ['"-".join(str(n) for n in range({0}))',
+                 '"-".join([str(n) for n in range({0})])',
+                 '"-".join(map(str, range({0})))']
+    >>> data = timeit_compare(functions, [range(10,101,10)], number=10000)
+    testing "-".join(str(n) for n in range({0}))...
+    testing "-".join([str(n) for n in range({0})])...
+    testing "-".join(map(str, range({0})))...
+
     Returns a defaultdict that has function names as keys, results as values.
     """
     number = kwargs.get('number', 100000)
     print_conditions = kwargs.get('print_conditions', False)
     performance = defaultdict(list)
-    if setups == 'pass':
+    if isinstance(setups, list): 
+        # user specifies their own list of setups corresponding to funcs
+        pass
+    elif setups == 'pass':
         # specify no setups for built-in functions like join
         setups = ['pass' for f in funcs]
     elif setups == 'main': 
@@ -58,26 +69,16 @@ def timeit_compare(funcs, inputs, setups='pass', **kwargs):
     return performance
 
 
-def get_conditions(inputs = []): 
-    """Converts a set of ranges for all variables into an 
-    exhaustive list of test conditions for timeit_compare(). 
-    """
-    # Wrap all singles in a list for range(*i) below
-    var = [[n] if not isinstance(n,(list,tuple)) else n for n in inputs]
-    
-    # Input like [20] will be interpreted as a range of 0-20. 
-    # To hold variables constant use [20,21] or just make it a constant
-    # in the function string. 
-    ranges = [range(*i) for i in var]
-    
-    # itertools.product summarizes all combinations of ordered conditions
+def get_conditions(inputs):
+    """Converts conditions for individual variables into an 
+    exhaustive list of combinations for timeit_compare(). 
+    """ 
+   # itertools.product summarizes all combinations of ordered conditions
     # at len = 1 it wraps values in tuples (0,) that confuse the timer below
-    if len(inputs) > 1:
-        conditions = list(product(*ranges))
+    if hasattr(inputs[0], '__iter__'):
+        return list(product(*inputs))
     else:
-        conditions = [[n] for n in ranges[0]]
-    
-    return conditions
+        return [[n] if not isinstance(n,(list,tuple)) else n for n in inputs]
 
 
 # TODO: function to filter a large dataset
