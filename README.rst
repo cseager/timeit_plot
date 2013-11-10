@@ -75,6 +75,7 @@ compare methods of grouping lists into n-grams. This is conceptually similar to 
 recipe given in the `documentation, <http://www.python.org/doc//current/library/itertools.html#recipes>`_ but is more general for n >= 2. 
 
 In this case, the two parameters that affect performance are: 
+
 1. The length of the object to be split into n-grams
 2. The size of the n-gram 
 
@@ -95,7 +96,7 @@ For example, the first entry from ``data`` would be:
 ``{'use_iterators(range({0}),{1})': [[0, 3, 0.0059], ...]``
 
 For the following plot, a filter is applied to show only the results for 
-inputs of length 20. The second variable is chosen as the dependent 
+inputs of length 20. The second variable is chosen as the independent 
 variable in the plot by using the keyword arg ``series=1``: ::
 
     >>> d2 = {}
